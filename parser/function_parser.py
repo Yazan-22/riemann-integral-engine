@@ -1,11 +1,12 @@
 import math
 from typing import Callable
-# from .exceptions rimport InvalidFunctionExpressionErro
+from .exceptions import InvalidFunctionExpressionError
+from .exceptions import  InvalidLimitError
 
 def parse_function(expression: str, a, b) -> tuple[Callable[[float], float], float, float]:
 
     allowed_names = {
-    "x": 0,
+        
     "abs": abs,
     "round": round,
     "pow": pow,
@@ -32,20 +33,24 @@ def parse_function(expression: str, a, b) -> tuple[Callable[[float], float], flo
     }
 
     try:
-        eval(expression, {"__builtins__": {}}, allowed_names)
-    except:
-        print("InvalidFunctionExpressionError")    
+        test_env = allowed_names.copy()
+        test_env["x"] = 1.0
+        eval(expression, {"__builtins__": {}}, test_env)
+    except Exception:
+        raise InvalidFunctionExpressionError("Invalid Function Expression Error")   
 
-    a = input("Enter the lower limit :")     
-    b = input("Enter the upper limit :")
     try:
         a =float(a)
         b =float(b)
     except ValueError:
-        print("Integration limits must be numeric.")
+        raise InvalidLimitError("Integration limits must be numeric.")
     
     if a >= b:
-        print("Lower limit must be less than upper limit.")
+        raise InvalidLimitError("Lower limit must be less than upper limit.")
+    
+    def f(x: float) -> float:
+        env = allowed_names.copy()
+        env["x"] = x
+        return eval(expression, {"__builtins__": {}}, env)
 
-f, a, b = parse_function("sin", -1, 1)
-print(f)
+    return f, a, b

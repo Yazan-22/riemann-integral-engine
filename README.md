@@ -30,3 +30,29 @@ Features:
 2-Add Trapezoidal method or Simpson method (depending on assistant’s request).
 3-Add tests for all modules (pytest) and ensure good coverage.
 4-Add performance profiling and create a short report on bottlenecks and suggested optimizations.
+
+Parser Module (parser/)
+The parser module is responsible for validating user input and converting the function expression and integration limits into a safe, executable form for the integration engine. It ensures that only allowed mathematical operations are used and that integration bounds are valid before passing data to the Riemann integrators.
+Folder Contents:
+
+1_ function_parser.py:
+  Contains the main parsing logic for user-defined function expressions and integration limits.
+  Responsibilities:
+  a_ Accept a mathematical function provided as a string (e.g., "x**2 + sin(x)").
+  b_ Validate the expression using a restricted evaluation environment (only safe math functions).
+  c_ Raise a custom error if the expression is invalid.
+  d_ Validate integration limits a and b.
+  e_ Ensure limits are numeric and satisfy a < b.
+  f_ Return:
+        * A callable Python function f(x)
+        * The validated lower limit a
+        * The validated upper limit b
+
+2_ exceptions.py:
+  Defines custom exception classes used by the parser module.
+  Contains:
+  a_ InvalidFunctionExpressionError — raised when a function expression contains invalid syntax or disallowed operations.
+  b_ InvalidLimitError — raised when integration limits are missing, non-numeric, or incorrectly ordered.
+
+3_ init.py:
+   Marks the parser folder as a Python package. 
