@@ -20,6 +20,7 @@ def parse_function(expression: str, a, b) -> tuple[Callable[[float], float], flo
     "cosh": math.cosh,
     "tanh": math.tanh,
     "exp": math.exp,
+    
     "log": math.log,
     "log10": math.log10,
     "log2": math.log2,
