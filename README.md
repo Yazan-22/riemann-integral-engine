@@ -30,11 +30,11 @@ Features:
 2-Add Trapezoidal method or Simpson method (depending on assistant’s request).
 3-Add tests for all modules (pytest) and ensure good coverage.
 4-Add performance profiling and create a short report on bottlenecks and suggested optimizations.
-
+---------------------------------------------------------------------------------------------------------
 Parser Module (parser/)
 The parser module is responsible for validating user input and converting the function expression and integration limits into a safe, executable form for the integration engine. It ensures that only allowed mathematical operations are used and that integration bounds are valid before passing data to the Riemann integrators.
-Folder Contents:
 
+Folder Contents:
 1_ function_parser.py:
   Contains the main parsing logic for user-defined function expressions and integration limits.
   Responsibilities:
@@ -55,4 +55,55 @@ Folder Contents:
   b_ InvalidLimitError — raised when integration limits are missing, non-numeric, or incorrectly ordered.
 
 3_ init.py:
-   Marks the parser folder as a Python package. 
+   Marks the parser folder as a Python package.
+
+---------------------------------------------------------------------------------------------------------
+
+Integrators Module (integrators/)
+The integrators module contains the core numerical algorithms used to approximate definite integrals using Riemann sums. Each integrator implements the same interface (the compute() method) but uses a different Riemann strategy: left endpoints, right endpoints, or midpoints.
+This module is built using object-oriented design, following the Strategy Pattern.
+All integrators inherit from a shared abstract base class. 
+
+Folder Contents:
+1_ base_integrator.py:
+  Purpose:Defines the abstract base class BaseIntegrator, which ensures that all integrators follow the same structure.
+  Responsibilities:
+  a_ Stores the function f(x) being integrated.
+  b_ Stores the interval limits a and b.
+  c_ Validates:
+      * func must be callable.
+      * Limits must be numeric
+      * a < b must hold.
+  d_ Declares the abstract method compute(n) that child classes must implement.    
+
+2_ left_integrator.py:
+    Purpose:Implements the Left Riemann Sum method.
+    Formula: the summation from i = 0 to n-1 for f(a+ih)h 
+    Key behaviors:
+      a_ Uses left endpoints of each subinterval.
+      b_ Ensures n is a positive integer.
+      c_ Computes:
+        * step size: h = (b - a) / n
+        * sample points: x_i = a + i * h
+        * sum of function values.
+
+3_ right_integrator.py:
+    Purpose:Implements the Right Riemann Sum method.
+    Formula: the summation from i = 1 to n for f(a+ih)h   
+    Key behaviors:
+      a_ Uses right endpoints of each subinterval.
+      b_ Validates n.
+      c_ Computes:
+          * step size: h = (b - a) / n
+          * sample points: x_i = a + i * h
+          * weighted sum of values
+
+4_ midpoint_integrator.py:
+    Purpose:Implements the Midpoint Riemann Sum method.  
+    Formula: the summation from i = 0 to n-1 for f(a+(i+1/2)h)h        
+    Key behaviors:
+    a_ Uses midpoint of each subinterval for improved accuracy.
+    b_ Validates n
+    c_ Computes:
+        * step size: h = (b - a) / n
+        * midpoint sample: x_mid = a + (i + 0.5) * h
