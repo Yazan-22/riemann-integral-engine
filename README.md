@@ -107,3 +107,37 @@ Folder Contents:
     c_ Computes:
         * step size: h = (b - a) / n
         * midpoint sample: x_mid = a + (i + 0.5) * h
+
+5_ init.py:
+   Marks the integrators folder as a Python package.
+---------------------------------------------------------------------------------------------------------
+
+Engine Module (engine/)
+The engine module coordinates the numerical integration process. It acts as the central controller of the system, connecting the parsed function, the integration limits, and the chosen Riemann method. The module does not perform numeric summations itself; instead, it selects the appropriate integrator from the integrators package and runs it.
+
+Folder Contents:
+
+1_ integration_engine.py:
+    Defines the IntegrationEngine class, responsible for:
+    * Accepting a mathematical function and integration limits.
+    * Validating that inputs are correctly defined.
+    * Selecting the appropriate Riemann method (left, right, midpoint).
+    * Creating the corresponding integrator object. 
+    * Running the computation using compute(n).
+    * Returning the final numerical approximation.
+
+2_ exceptions.py:
+    Contains custom exceptions used by the engine module. These allow clear and descriptive error messages:
+    * IntegrationError – Base class for integration-related errors.
+    * UnknownMethodError – Raised when an unsupported integration method is requested.
+    * InvalidStepError – Raised when the number of subintervals n is invalid.
+    * InvalidEngineInputError – Raised when the function or integration limits are incorrectly defined.
+
+3_ init.py:
+   Marks the engine folder as a Python package.
+
+  Responsibilities:
+  * Acts as the controller for the numerical integration system.
+  * Ensures consistent error handling through custom exceptions.
+  * Provides a single interface (run) for performing numerical approximation.
+  * Decouples method selection from computation logic, supporting future extensions (e.g., trapezoidal rule, Simpson’s * * rule, plotting, accuracy analysis).
