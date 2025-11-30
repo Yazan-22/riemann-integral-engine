@@ -46,7 +46,7 @@ def choose_method():
 def main():
     try:
         print("Enter the function f(x) (example: sin(x), x**2 + 3*x, exp(x))")
-        func_str = input("f(x) = ")
+        func_str = input("f(x) = ").lower()
 
         a = float(input("Enter lower bound a: "))
         b = float(input("Enter upper bound b: "))
