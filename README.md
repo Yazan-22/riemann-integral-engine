@@ -188,6 +188,6 @@ Example Flow
     the integration from 0 to 2 for x^2 dx
 
 Running the Program:
-    From the folder that contains (riemann_integral_engine), run:
-    python -m riemann_integral_engine.main
+    From the folder "riemann_integral_engine", run:
+    python -m main
   This ensures all package imports work correctly.
