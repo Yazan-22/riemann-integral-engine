@@ -1,9 +1,9 @@
-from riemann_integral_engine.parser.function_parser import parse_function
-from riemann_integral_engine.engine.integration_engine import IntegrationEngine
-from riemann_integral_engine.engine.exceptions import IntegrationError
-from riemann_integral_engine.integrators.left_riemann_integrator import LeftRiemannIntegrator
-from riemann_integral_engine.integrators.right_riemann_integrator import RightRiemannIntegrator
-from riemann_integral_engine.integrators.midpoint_integrator import MidpointIntegrator
+from parser.function_parser import parse_function
+from engine.integration_engine import IntegrationEngine
+from engine.exceptions import IntegrationError
+from integrators.left_riemann_integrator import LeftRiemannIntegrator
+from integrators.right_riemann_integrator import RightRiemannIntegrator
+from integrators.midpoint_integrator import MidpointIntegrator
 
 
 def choose_method():

@@ -1,8 +1,8 @@
 from typing import Callable
-from riemann_integral_engine.integrators.left_riemann_integrator import LeftRiemannIntegrator
-from riemann_integral_engine.integrators.right_riemann_integrator import RightRiemannIntegrator
-from riemann_integral_engine.integrators.midpoint_integrator import MidpointIntegrator
-from riemann_integral_engine.engine.exceptions import (
+from integrators.left_riemann_integrator import LeftRiemannIntegrator
+from integrators.right_riemann_integrator import RightRiemannIntegrator
+from integrators.midpoint_integrator import MidpointIntegrator
+from engine.exceptions import (
     UnknownMethodError,
     InvalidStepError,
     InvalidEngineInputError,
