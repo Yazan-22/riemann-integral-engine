@@ -1,6 +1,6 @@
 from .base_integrator import BaseIntegrator
 
-class RightRiemmanIntegrator(BaseIntegrator):
+class RightRiemannIntegrator(BaseIntegrator):
     def compute(self, n):
         if n <= 0:
             raise ValueError("n must be a positive integer")

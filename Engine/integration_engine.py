@@ -1,8 +1,8 @@
 from typing import Callable
-from ..integrators.left_riemann_integrator import LeftRiemmannIntegrator
-from ..integrators.right_riemann_integrator import RightRiemmanIntegrator
-from ..integrators.midpoint_integrator import MidpointIntegrator
-from .exceptions import (
+from riemann_integral_engine.integrators.left_riemann_integrator import LeftRiemannIntegrator
+from riemann_integral_engine.integrators.right_riemann_integrator import RightRiemannIntegrator
+from riemann_integral_engine.integrators.midpoint_integrator import MidpointIntegrator
+from riemann_integral_engine.engine.exceptions import (
     UnknownMethodError,
     InvalidStepError,
     InvalidEngineInputError,
@@ -37,9 +37,9 @@ class IntegrationEngine:
         method = method.lower()
 
         if method == "left":
-            integrator = LeftRiemmannIntegrator(self.func, self.a, self.b)
+            integrator = LeftRiemannIntegrator(self.func, self.a, self.b)
         elif method == "right":
-            integrator = RightRiemmanIntegrator(self.func, self.a, self.b)
+            integrator = RightRiemannIntegrator(self.func, self.a, self.b)
         elif method == "midpoint":
             integrator = MidpointIntegrator(self.func, self.a, self.b)
         else:

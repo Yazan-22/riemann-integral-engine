@@ -141,3 +141,53 @@ Folder Contents:
   * Ensures consistent error handling through custom exceptions.
   * Provides a single interface (run) for performing numerical approximation.
   * Decouples method selection from computation logic, supporting future extensions (e.g., trapezoidal rule, Simpson’s * * rule, plotting, accuracy analysis).
+
+---------------------------------------------------------------------------------------------------------
+
+Main Application (main.py)
+The main.py file serves as the entry point of the Riemann Integral Engine.
+It connects all project components together:
+ * parses the user-provided function and integration limits
+ * selects a Riemann sum method (left, right, midpoint)
+ * executes the numerical integration
+ * prints the final approximation
+Responsibilities:
+
+1- Collecting user input
+ * function expression (e.g., "x**2 + 3*x")
+ * integration limits a and b
+ * number of intervals n
+ * chosen Riemann method (left, right, or midpoint)
+
+2- Calling the parser module 
+ it uses: from riemann_integral_engine.parser.function_parser import parse_function
+ to safely parse the input function and convert limits into floats.
+
+3- Using the Engine module 
+  It creates an engine instance: from riemann_integral_engine.engine.integration_engine import IntegrationEngine
+  and dispatches the computation to the selected integrator.
+
+4- Handling errors
+  it uses :from riemann_integral_engine.engine.exceptions import IntegrationError
+  it catches parsing/limit errors and prints appropriate messages.
+
+5- Producing output
+  It prints the final numerical approximation to the console.
+
+Example Flow
+1- User enters:
+  f(x) = x**2
+  a = 0
+  b = 2
+  n = 100
+  method = left
+
+2- main.py parses the function using the parser module.
+3- It calls the integration engine to compute the integral
+4- It prints the approximate value of:
+    the integration from 0 to 2 for x^2 dx
+
+Running the Program:
+    From the folder that contains (riemann_integral_engine), run:
+    python -m riemann_integral_engine.main
+  This ensures all package imports work correctly.
