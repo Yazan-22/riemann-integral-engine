@@ -41,9 +41,9 @@ def main():
         result = engine.run(method_choice,n)
 
         print(f"Approximate integral value: {result}")
-        plot_choice = input("Do you want to plot the function and area? [y/N]: ").strip().lower()
+        plot_choice = input("Do you want to plot the function and area? [Y/N]: ").strip().lower()
 
-        if plot_choice == "y":
+        if plot_choice == "Y":
             try:
                 plot_function_and_area(func, a, b, n, method_choice)
             except Exception as exc:
