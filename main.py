@@ -4,7 +4,7 @@ from engine.exceptions import IntegrationError
 from integrators.left_riemann_integrator import LeftRiemannIntegrator
 from integrators.right_riemann_integrator import RightRiemannIntegrator
 from integrators.midpoint_integrator import MidpointIntegrator
-
+from plotting import plot_function_and_area
 
 def choose_method():
     print("Select integration method:")
@@ -22,26 +22,6 @@ def choose_method():
         return "midpoint"
     else:
         raise IntegrationError("Invalid integration method choice.")
-
-# def main():
-#     try:
-#         print("Enter the function f(x) (example: sin(x), x**2 + 3*x, exp(x))")
-#         func_str = input("f(x) = ")
-#         a = float(input("Enter lower bound a: "))  
-#         b = float(input("Enter upper bound b: "))  
-#         n = int(input("Enter number of intervals n: ")) 
-        
-#         func, parsed_a, parsed_b = parse_function(func_str, a, b)
-
-#         IntegratorClass = choose_method() 
-
-#         integrator = IntegratorClass(func, a, b)
-#         result = integrator.compute(n)
-
-#         print(f"Approximate integral value: {result}") 
-
-#     except Exception as e:
-#         print(f"Unexpected error: {e}")
 
 def main():
     try:
@@ -61,6 +41,13 @@ def main():
         result = engine.run(method_choice,n)
 
         print(f"Approximate integral value: {result}")
+        plot_choice = input("Do you want to plot the function and area? [y/N]: ").strip().lower()
+
+        if plot_choice == "y":
+            try:
+                plot_function_and_area(func, a, b, n, method_choice)
+            except Exception as exc:
+                print("Could not generate plot:", exc)
 
     except IntegrationError as e:
         print("Integration error:", e)
@@ -69,11 +56,3 @@ def main():
 
 if __name__ == "__main__":
     main()        
-
-
-
-
-
-
-
-  
