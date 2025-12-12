@@ -151,6 +151,9 @@ It connects all project components together:
  * selects a Riemann sum method (left, right, midpoint)
  * executes the numerical integration
  * prints the final approximation
+The application also supports optional visualization of the function and the
+approximated area under the curve using matplotlib.
+
 Responsibilities:
 
 1- Collecting user input
@@ -186,8 +189,20 @@ Example Flow
 3- It calls the integration engine to compute the integral
 4- It prints the approximate value of:
     the integration from 0 to 2 for x^2 dx
+------------------------------------------------------------------------------------------
+## Performance Profiling
+The project includes a dedicated profiling module located in the `profiling/` folder.
+Profiling is performed using Python’s `cProfile` and `pstats` to analyze runtime behavior
+of the integration methods. A short analysis of observed bottlenecks and suggested
+optimizations is provided in `profiling/performance_report.md`.
+-----------------------------------------------------------------------------------------
 
 Running the Program:
     From the folder "riemann_integral_engine", run:
     python -m main
   This ensures all package imports work correctly.
+
+Running the profiling:
+  python -m profiling.profile_engine
+
+______
