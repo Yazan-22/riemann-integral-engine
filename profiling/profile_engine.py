@@ -1,10 +1,9 @@
 from __future__ import annotations
-
 import cProfile
 import pstats
 from pathlib import Path
 
-from riemann_integral_engine.engine.integration_engine import IntegrationEngine
+from engine.integration_engine import IntegrationEngine
 
 
 def target_function():
@@ -18,8 +17,8 @@ def target_function():
 
     for method in methods:
         for n in ns:
-            engine = IntegrationEngine(func, a, b, method=method)
-            _ = engine.run(n)
+            engine = IntegrationEngine(func, a, b)
+            _ = engine.run(method, n)
 
 
 def main():
